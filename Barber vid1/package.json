@@ -1,0 +1,24 @@
+{
+  "name": "barber-vid1",
+  "version": "0.0.1",
+  "description": "Barber video project using Remotion",
+  "scripts": {
+    "start": "npx remotion studio",
+    "build": "npx remotion render",
+    "upgrade": "npx remotion upgrade"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.457",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.457"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.1",
+    "@types/react-dom": "18.3.1",
+    "typescript": "5.4.3"
+  },
+  "remotion": {
+    "entrypoint": "src/index.ts"
+  }
+}
