@@ -1,6 +1,24 @@
 {
-  "lastUpdated": "2026-05-06T21:00:00Z",
+  "lastUpdated": "2026-05-06T22:00:00Z",
   "prospects": [
+    {
+      "id": "p009",
+      "name": "Isaac",
+      "where": "Barber client",
+      "stage": "MG",
+      "notes": "24 years old. School for firefighting, works at a lab (shifts start 5pm). Girlfriend works at private elementary school in PV. DTM'd today — stoic reaction but positive. Wants something on the side, doesn't know where to start.",
+      "next": "Call scheduled Friday May 8 at 1pm",
+      "updatedAt": "2026-05-06T22:00:00Z"
+    },
+    {
+      "id": "p010",
+      "name": "Max",
+      "where": "EOS Gym",
+      "stage": "MG",
+      "notes": "Met April 22 at gym. Referral source — says he knows someone who might be looking. Goal: get the referral's number on today's call.",
+      "next": "Call TODAY at 6pm — get referral's number",
+      "updatedAt": "2026-05-06T22:00:00Z"
+    },
     {
       "id": "p001",
       "name": "Saul",
