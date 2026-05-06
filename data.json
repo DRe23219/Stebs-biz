@@ -1,0 +1,228 @@
+{
+  "lastUpdated": "2026-05-06T21:00:00Z",
+  "prospects": [
+    {
+      "id": "p001",
+      "name": "Saul",
+      "where": "EOS Gym",
+      "stage": "COLD",
+      "notes": "YouTube channel, wants clothing brand.",
+      "next": "Let him respond to text first",
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "p002",
+      "name": "Mark",
+      "where": "Barber client",
+      "stage": "MG",
+      "notes": "MG scheduled.",
+      "next": "Run MG — show the plan",
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "p003",
+      "name": "Brian (B)",
+      "where": "EOS Gym",
+      "stage": "COLD",
+      "notes": "DTM'd in Spanish. Follow-up sent May 2.",
+      "next": "Wait for response",
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "p004",
+      "name": "Enrique",
+      "where": "EOS Gym",
+      "stage": "COLD",
+      "notes": "Said yes. No response yet.",
+      "next": "Follow up Wed May 6",
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "p005",
+      "name": "Bo",
+      "where": "EOS Gym",
+      "stage": "MG",
+      "notes": "Ukrainian. MG scheduled.",
+      "next": "Run the plan",
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "p006",
+      "name": "Angel",
+      "where": "EOS Gym",
+      "stage": "COLD",
+      "notes": "No response.",
+      "next": "Follow up Tue May 5",
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "p007",
+      "name": "Guilbert",
+      "where": "Unknown",
+      "stage": "BP",
+      "notes": "2nd BP. Said needs money now.",
+      "next": "Keep door open — wait",
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "p008",
+      "name": "Ricardo",
+      "where": "Car meet",
+      "stage": "COLD",
+      "notes": "DTM'd on e-com, said yes.",
+      "next": "Follow up Mon May 4",
+      "updatedAt": "2026-05-06T00:00:00Z"
+    }
+  ],
+  "customers": [
+    {
+      "id": "c001",
+      "name": "Madre",
+      "how": "Mom",
+      "status": "active",
+      "phone": "",
+      "birthday": "",
+      "currentProducts": "",
+      "frequency": "Monthly",
+      "followup": "",
+      "fnote": "Best customer — monthly",
+      "notes": "My mom.",
+      "orders": [
+        {
+          "month": "May 2026",
+          "products": "Cholesterol Health x1\nDouble X x1\nAll-in-One Bar x1\nVanilla Protein Shake x1",
+          "pv": 150
+        }
+      ],
+      "samples": [],
+      "interests": [],
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "c002",
+      "name": "Lidia",
+      "how": "Customer",
+      "status": "active",
+      "phone": "",
+      "birthday": "",
+      "currentProducts": "",
+      "frequency": "Monthly",
+      "followup": "",
+      "fnote": "Loyal monthly buyer",
+      "notes": "",
+      "orders": [
+        {
+          "month": "May 2026",
+          "products": "XS Lemon x1\nXS Grapefruit x1\nGlister Toothpaste x3\nWomen's Pack x1",
+          "pv": 120
+        }
+      ],
+      "samples": [],
+      "interests": [],
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "c003",
+      "name": "Ian",
+      "how": "Pickleball",
+      "status": "sampled",
+      "phone": "",
+      "birthday": "",
+      "currentProducts": "Energy drinks",
+      "frequency": "Not yet",
+      "followup": "",
+      "fnote": "Sample XS Energy",
+      "notes": "20s, clothing brand owner.",
+      "orders": [],
+      "samples": ["XS Energy Drink"],
+      "interests": ["XS Energy Drinks", "XS Sports Protein Bars"],
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "c004",
+      "name": "Julian",
+      "how": "Barber client",
+      "status": "sampled",
+      "phone": "",
+      "birthday": "",
+      "currentProducts": "",
+      "frequency": "Not yet",
+      "followup": "",
+      "fnote": "Sample XS Elite Focus",
+      "notes": "20s, e-bike business. Monthly client.",
+      "orders": [],
+      "samples": ["XS Elite Focus Energy"],
+      "interests": ["XS Elite Focus Energy", "XS Energy+Focus Tablets"],
+      "updatedAt": "2026-05-06T00:00:00Z"
+    }
+  ],
+  "team": [
+    {
+      "id": "t001",
+      "name": "Niko",
+      "where": "Team",
+      "pace": "Run",
+      "pv": 0,
+      "notes": "Actively building — RUN pace.",
+      "next": "Keep supporting his activity",
+      "downline": ["Serena", "Presley", "Jermey"],
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "t002",
+      "name": "Jayson",
+      "where": "Team",
+      "pace": "Jog",
+      "pv": 0,
+      "notes": "Inconsistent — needs accountability.",
+      "next": "Check in on activity this week",
+      "downline": [],
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "t003",
+      "name": "Karla",
+      "where": "Team",
+      "pace": "Walk",
+      "pv": 0,
+      "notes": "Barely moving — needs a push.",
+      "next": "Have a real conversation about commitment",
+      "downline": [],
+      "updatedAt": "2026-05-06T00:00:00Z"
+    }
+  ],
+  "notes": [
+    {
+      "id": "n001",
+      "title": "Business Overview",
+      "content": "Running an Amway business out of LA. Focus areas:\n- EOS Gym contacts (primary source)\n- Barber shop clients\n- Car meets & social events\n\nGoal: Build consistent income, grow team, hit Silver Producer.",
+      "tags": ["overview", "strategy"],
+      "createdAt": "2026-05-01T00:00:00Z",
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "n002",
+      "title": "DTM Script",
+      "content": "DTM = Drop the Mention\n\nKey phrases:\n- \"Hey I just started a business, I think you'd be perfect for it.\"\n- \"Are you open to making extra money on the side?\"\n- \"I'm looking for sharp people — you came to mind.\"\n\nAlways plant seeds. Never chase.",
+      "tags": ["scripts", "dtm"],
+      "createdAt": "2026-05-01T00:00:00Z",
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "n003",
+      "title": "May 2026 Focus",
+      "content": "Priorities this month:\n1. Follow up on all COLD prospects — esp. Enrique, Angel, Ricardo\n2. Run MG with Mark and Bo\n3. Push Guilbert BP — money objection\n4. Get 2 new customers from gym contacts\n5. Support Niko — help him close his first customer\n\nTarget PV: 300+ personal",
+      "tags": ["monthly-goals", "may-2026"],
+      "createdAt": "2026-05-06T00:00:00Z",
+      "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "n004",
+      "title": "Product Knowledge",
+      "content": "Top sellers:\n- XS Energy (all flavors) — great for gym crowd\n- Double X — flagship multivitamin\n- Cholesterol Health — great for older customers\n- Glister Toothpaste — everyday use\n- XS Elite Focus — students, entrepreneurs\n- Women's Pack — complete health bundle\n- Vanilla Protein Shake — gym/fitness crowd\n\nPV averages:\n- XS 12-pack: ~50 PV\n- Double X: ~45 PV\n- Cholesterol Health: ~30 PV",
+      "tags": ["products", "knowledge"],
+      "createdAt": "2026-05-01T00:00:00Z",
+      "updatedAt": "2026-05-06T00:00:00Z"
+    }
+  ]
+}
