@@ -77,6 +77,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;hei
 .bi[data-s="team"].on .bi-label{color:var(--green)}
 .bi[data-s="notes"].on{background:var(--teal-dim)}
 .bi[data-s="notes"].on .bi-label{color:var(--teal)}
+.bi[data-s="products"].on{background:var(--purple-dim)}
+.bi[data-s="products"].on .bi-label{color:var(--purple)}
 .bi:active{opacity:.7;transform:scale(.92)}
 
 /* ── HOME ── */
@@ -211,6 +213,28 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;hei
 .note-tag{font-size:10px;font-weight:600;padding:3px 10px;border-radius:18px;background:var(--teal-dim);border:1px solid rgba(94,232,208,.16);color:var(--teal)}
 .obs-banner{display:flex;align-items:center;gap:7px;padding:9px 13px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin:0 11px 12px;font-size:11px;font-weight:600;color:var(--text3)}
 
+/* ── PRODUCTS ── */
+.prod-search{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:11px 14px 11px 38px;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.prod-search:focus{border-color:rgba(180,154,247,.4)}
+.search-wrap{position:relative;padding:12px 11px 0}
+.search-ico{position:absolute;left:22px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none;margin-top:6px}
+.cat-row{display:flex;gap:6px;padding:10px 11px 0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cat-row::-webkit-scrollbar{display:none}
+.cat-chip{padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;background:var(--surface2);border:1px solid var(--border);color:var(--text3);cursor:pointer;white-space:nowrap;transition:all .18s;flex-shrink:0;user-select:none}
+.cat-chip.on{background:var(--purple-dim);border-color:rgba(180,154,247,.3);color:var(--purple)}
+.cat-chip:active{transform:scale(.92);opacity:.8}
+.prod-card{background:var(--surface);border:1px solid var(--border);border-radius:19px;overflow:hidden;margin:0 0 7px;transition:border-color .2s}
+.prod-card.open{border-color:rgba(180,154,247,.25)}
+.prod-top{display:flex;align-items:center;gap:11px;padding:13px;cursor:pointer;user-select:none}
+.prod-top:active{opacity:.8}
+.prod-ico{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.prod-body{display:none;padding:0 13px 13px;border-top:1px solid var(--border);padding-top:13px}
+.prod-card.open .prod-body{display:block}
+.prod-card.open .ch{transform:rotate(180deg)}
+.pv-tag{font-size:9px;font-weight:800;padding:4px 9px;border-radius:7px;background:var(--purple-dim);border:1px solid rgba(180,154,247,.2);color:var(--purple);white-space:nowrap}
+.flavor-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.flavor-chip{font-size:10px;font-weight:600;padding:3px 9px;border-radius:16px;background:var(--surface2);border:1px solid var(--border);color:var(--text3)}
+
 /* ── TOAST ── */
 #toast{position:fixed;bottom:calc(82px + var(--safe-bot) + 10px);left:50%;transform:translateX(-50%) translateY(16px);background:var(--surface2);border:1px solid var(--border2);border-radius:20px;padding:9px 18px;font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;opacity:0;transition:all .3s;pointer-events:none;z-index:100}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -267,6 +291,10 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;hei
       </div>
       <div class="nav-card n" onclick="go('notes')">
         <div class="nav-left"><div class="nav-ico">📝</div><div><div class="nav-tit">Notes</div><div class="nav-sub">Obsidian Sync &amp; Strategy</div></div></div>
+        <div class="nav-arr">→</div>
+      </div>
+      <div class="nav-card" style="--c:var(--purple);--cd:var(--purple-dim)" onclick="go('products')">
+        <div class="nav-left"><div class="nav-ico" style="background:var(--purple-dim)">📦</div><div><div class="nav-tit" style="color:var(--purple)">Products</div><div class="nav-sub">Full Amway catalog &amp; PV</div></div></div>
         <div class="nav-arr">→</div>
       </div>
     </div>
@@ -346,19 +374,37 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;hei
   </div>
 </div>
 
+<!-- PRODUCTS -->
+<div id="products" class="screen">
+  <div class="pad">
+    <div class="topbar">
+      <div class="page-title" style="color:var(--purple)">Products</div>
+      <button class="sync-btn" onclick="sync(true)"><span class="sync-icon">↻</span> Sync</button>
+    </div>
+    <div class="search-wrap">
+      <span class="search-ico">🔍</span>
+      <input class="prod-search" id="prodSearch" type="search" placeholder="Search by name, category, use case..." oninput="filterProducts()" autocomplete="off">
+    </div>
+    <div class="cat-row" id="catRow"></div>
+    <div class="stats-row" id="prodStats"></div>
+    <div class="sec" id="prodSec">All Products</div>
+    <div id="prodList" style="padding:0 11px;margin-bottom:10px"></div>
+  </div>
+</div>
+
 <!-- BOTTOM NAV -->
 <div id="bnav">
   <div class="bi on" data-s="home" onclick="go('home')"><div class="bi-icon">🏠</div><div class="bi-label">Home</div></div>
   <div class="bi" data-s="prospects" onclick="go('prospects')"><div class="bi-icon">🎯</div><div class="bi-label">Prospects</div></div>
   <div class="bi" data-s="customers" onclick="go('customers')"><div class="bi-icon">🛍️</div><div class="bi-label">Customers</div></div>
-  <div class="bi" data-s="team" onclick="go('team')"><div class="bi-icon">👥</div><div class="bi-label">Team</div></div>
+  <div class="bi" data-s="products" onclick="go('products')"><div class="bi-icon">📦</div><div class="bi-label">Products</div></div>
   <div class="bi" data-s="notes" onclick="go('notes')"><div class="bi-icon">📝</div><div class="bi-label">Notes</div></div>
 </div>
 
 <script>
 const CACHE_KEY='stebs_data_v1';
-let D={prospects:[],customers:[],team:[],notes:[]};
-let ctab='active',cur='home';
+let D={prospects:[],customers:[],team:[],notes:[],products:[]};
+let ctab='active',cur='home',activeCat='All';
 
 // ── UTILS ──
 function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
@@ -384,6 +430,7 @@ function go(s){
   if(s==='customers')setCtab(ctab,true);
   if(s==='team')renderTeam();
   if(s==='notes')renderNotes();
+  if(s==='products')renderProducts();
 }
 
 // ── SYNC ──
@@ -419,6 +466,7 @@ function renderCur(){
   if(cur==='customers')renderCustomers();
   if(cur==='team')renderTeam();
   if(cur==='notes')renderNotes();
+  if(cur==='products')renderProducts();
 }
 
 // ── HOME ──
@@ -549,6 +597,78 @@ function renderTeam(){
         ${t.next?`<div class="next-box"><div class="fl">Next Action</div><div class="fv">${esc(t.next)}</div></div>`:''}
         ${t.notes?`<div class="fl">Notes</div><div class="fv">${esc(t.notes)}</div>`:''}
         <div class="fl">Downline</div>${dlH}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── PRODUCTS ──
+const CAT_COLOR={Energy:'var(--orange)',Nutrition:'var(--green)',Weight:'var(--blue)',Beauty:'var(--purple)',
+  'Personal Care':'var(--teal)','Home':'var(--gold)','High-Ticket':'var(--red)'};
+const CAT_ICO={Energy:'⚡',Nutrition:'💊',Weight:'⚖️',Beauty:'✨','Personal Care':'🧴','Home':'🏠','High-Ticket':'💎'};
+
+function renderProducts(){
+  const ps=D.products||[];
+  activeCat='All';
+  document.getElementById('prodSearch').value='';
+  // Build category chips
+  const cats=['All',...[...new Set(ps.map(p=>p.category))].sort()];
+  document.getElementById('catRow').innerHTML=cats.map(c=>
+    `<div class="cat-chip${c==='All'?' on':''}" onclick="setCat('${c}')">${c==='All'?'All':CAT_ICO[c]||'📦'} ${c}</div>`
+  ).join('');
+  filterProducts();
+}
+
+function setCat(cat){
+  activeCat=cat;
+  document.querySelectorAll('.cat-chip').forEach(el=>{
+    el.classList.toggle('on',el.textContent.trim().endsWith(cat)||cat==='All'&&el.textContent.trim()==='All');
+  });
+  filterProducts();
+}
+
+function filterProducts(){
+  const ps=D.products||[];
+  const q=(document.getElementById('prodSearch')?.value||'').toLowerCase().trim();
+  const filtered=ps.filter(p=>{
+    const catOk=activeCat==='All'||p.category===activeCat;
+    if(!catOk)return false;
+    if(!q)return true;
+    return p.name.toLowerCase().includes(q)||
+      (p.category||'').toLowerCase().includes(q)||
+      (p.description||'').toLowerCase().includes(q)||
+      (p.bestFor||'').toLowerCase().includes(q)||
+      (p.tags||[]).some(t=>t.toLowerCase().includes(q))||
+      (p.flavors||[]).some(f=>f.toLowerCase().includes(q));
+  });
+  const label=activeCat==='All'?'All Products':activeCat;
+  document.getElementById('prodSec').textContent=`${label} — ${filtered.length} product${filtered.length!==1?'s':''}`;
+  document.getElementById('prodStats').innerHTML=
+    `<div class="stat"><div class="stat-n" style="color:var(--purple)">${(D.products||[]).length}</div><div class="stat-l">Total</div></div>`+
+    `<div class="stat"><div class="stat-n" style="color:var(--orange)">${filtered.length}</div><div class="stat-l">Showing</div></div>`+
+    `<div class="stat"><div class="stat-n" style="color:var(--green)">${[...new Set((D.products||[]).map(p=>p.category))].length}</div><div class="stat-l">Categories</div></div>`;
+  if(!filtered.length){
+    document.getElementById('prodList').innerHTML='<div class="empty">No products match.</div>';return;
+  }
+  document.getElementById('prodList').innerHTML=filtered.map(p=>{
+    const col=CAT_COLOR[p.category]||'var(--purple)';
+    const ico=CAT_ICO[p.category]||'📦';
+    const flavorH=(p.flavors||[]).length
+      ?`<div class="flavor-chips">${p.flavors.map(f=>`<div class="flavor-chip">${esc(f)}</div>`).join('')}</div>`:'';
+    return`<div class="prod-card" id="pr_${p.id}">
+      <div class="prod-top" onclick="tog('pr_${p.id}')">
+        <div class="prod-ico" style="background:${col}1a">${ico}</div>
+        <div class="c-info"><div class="c-name" style="color:${col}">${esc(p.name)}</div><div class="c-sub">${esc(p.category)}</div></div>
+        <div class="c-right"><div class="pv-tag">${p.pv} PV</div><div class="ch">▾</div></div>
+      </div>
+      <div class="prod-body">
+        <div class="fl">Description</div><div class="fv">${esc(p.description)}</div>
+        <div class="fl">Best For</div><div class="fv" style="color:${col}">${esc(p.bestFor)}</div>
+        <div class="info-grid" style="margin-top:10px">
+          <div class="ib"><div class="ib-l">PV</div><div class="ib-v" style="color:var(--purple)">${p.pv}</div></div>
+          <div class="ib"><div class="ib-l">Price</div><div class="ib-v">${esc(p.price||'—')}</div></div>
+        </div>
+        ${(p.flavors||[]).length?`<div class="fl">Flavors / Varieties</div>${flavorH}`:''}
       </div>
     </div>`;
   }).join('');
