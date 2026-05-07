@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-07T00:00:00Z",
+  "lastUpdated": "2026-05-07T12:00:00Z",
   "prospects": [
     {
       "id": "p009",
@@ -17,9 +17,9 @@
       "where": "EOS Gym",
       "stage": "MG",
       "notes": "Met April 22 at gym. Referral source — says he knows someone who might be looking. Goal: get the referral's number on today's call.",
-      "next": "Call TODAY at 6pm — get referral's number",
-      "followupDate": "2026-05-06",
-      "updatedAt": "2026-05-06T22:00:00Z"
+      "next": "Follow up tomorrow — get referral's number",
+      "followupDate": "2026-05-08",
+      "updatedAt": "2026-05-07T12:00:00Z"
     },
     {
       "id": "p001",
@@ -57,9 +57,9 @@
       "where": "EOS Gym",
       "stage": "COLD",
       "notes": "Said yes. No response yet.",
-      "next": "Follow up Wed May 6",
-      "followupDate": "2026-05-06",
-      "updatedAt": "2026-05-06T00:00:00Z"
+      "next": "Followed up — waiting for response",
+      "followupDate": null,
+      "updatedAt": "2026-05-07T12:00:00Z"
     },
     {
       "id": "p005",
@@ -97,9 +97,9 @@
       "where": "Car meet",
       "stage": "COLD",
       "notes": "DTM'd on e-com, said yes.",
-      "next": "Follow up Mon May 4",
-      "followupDate": "2026-05-04",
-      "updatedAt": "2026-05-06T00:00:00Z"
+      "next": "Followed up — waiting for response",
+      "followupDate": null,
+      "updatedAt": "2026-05-07T12:00:00Z"
     }
   ],
   "customers": [
