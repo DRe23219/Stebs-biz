@@ -241,6 +241,30 @@
       "tags": ["products", "knowledge"],
       "createdAt": "2026-05-01T00:00:00Z",
       "updatedAt": "2026-05-06T00:00:00Z"
+    },
+    {
+      "id": "n005",
+      "title": "Hawkins Training — The Conversation Formula",
+      "content": "Formula: Connection → Compliment → Pull the Trigger\n\nAlways pay the compliment first — without it, everything is off.\nThen tell your story. Then ask the key question and shut up.",
+      "tags": ["training", "scripts", "hawkins"],
+      "createdAt": "2026-05-07T00:00:00Z",
+      "updatedAt": "2026-05-07T00:00:00Z"
+    },
+    {
+      "id": "n006",
+      "title": "Hawkins Training — What You Say You Do",
+      "content": "Answer #1 (when they ask what you do):\n\"I have a contractual arrangement online. I drive traffic to the internet and get paid on the back side — anything more than that, we need to sit down.\"\n\nAnswer #2 (one-liner alternatives):\n- \"Leadership development company — I show people how to build an asset.\"\n- \"Business development — I show people how to capitalize on what's happening online.\"\n\nRules:\n- Only answer ONE question. Do not take the second.\n- Do not be afraid to walk away.\n- If they push for more: \"That's a sit-down conversation.\"",
+      "tags": ["training", "scripts", "hawkins", "dtm"],
+      "createdAt": "2026-05-07T00:00:00Z",
+      "updatedAt": "2026-05-07T00:00:00Z"
+    },
+    {
+      "id": "n007",
+      "title": "Hawkins Training — Key Phrases & Mindset",
+      "content": "Key closing phrase:\n\"If you're looking, we should sit down and grab a cup of coffee.\"\n→ Then be quiet. Let them respond. They'll tell you if they're looking.\n\nOpener story:\n- I own an online model that's been successful.\n- I'm in my 20s and I don't work like I used to.\n- My business is growing.\n- I'm always looking for sharp, ambitious people.\n- When I find the right person, I show them how to do what I do.\n- KEY: \"If you're looking...\"\n\nMindset:\n- Be UP. Enthusiasm: 10/10. Simplicity: 10/10.\n- Develop an icebreaker. Be where people are.\n- If you're nervous — just talk to people.\n- If something works, don't change it.\n- Conversations are everywhere.",
+      "tags": ["training", "mindset", "hawkins", "key-phrases"],
+      "createdAt": "2026-05-07T00:00:00Z",
+      "updatedAt": "2026-05-07T00:00:00Z"
     }
   ],
   "products": [
