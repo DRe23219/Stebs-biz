@@ -92,13 +92,23 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;hei
 .sync-label{font-size:11px;color:var(--text3);font-weight:500}
 .sync-label span{color:var(--text2);font-weight:600}
 
-.fu-alert{margin:14px 18px 0;background:rgba(247,126,126,.07);border:1px solid rgba(247,126,126,.2);border-radius:18px;padding:13px 15px;cursor:pointer}
-.fu-alert:active{opacity:.8}
-.fu-top{display:flex;align-items:center;gap:7px;margin-bottom:4px}
-.fu-dot{width:7px;height:7px;background:var(--red);border-radius:50%;animation:pulse 1.5s ease-in-out infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.fu-title{font-size:10px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:1px}
-.fu-names{font-size:12px;color:var(--text2);font-weight:500;line-height:1.5}
+
+/* ── DAILY ACTION LIST ── */
+.dal{margin:14px 18px 0;background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.dal-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px}
+.dal-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text)}
+.dal-badge{border-radius:20px;padding:3px 10px;font-size:11px;font-weight:800}
+.dal-badge.hot{background:var(--red-dim);border:1px solid rgba(247,126,126,.2);color:var(--red)}
+.dal-badge.clear{background:var(--green-dim);border:1px solid rgba(110,240,160,.2);color:var(--green)}
+.dal-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 16px;border-top:1px solid var(--border);cursor:pointer;transition:background .15s;-webkit-tap-highlight-color:transparent}
+.dal-item:active{background:var(--surface2)}
+.dal-name{font-size:14px;font-weight:700;color:var(--text)}
+.dal-next{font-size:11px;color:var(--text3);margin-top:2px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}
+.dal-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.dal-overdue{font-size:9px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:.5px}
+.dal-today{font-size:9px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.5px}
+.dal-clear{text-align:center;padding:18px;font-size:13px;color:var(--green);font-weight:600}
 
 .home-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:14px 18px 0}
 .hstat{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:17px 15px}
@@ -266,9 +276,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;hei
         <span class="sync-icon">↻</span> Sync
       </button>
     </div>
-    <div id="fuAlert" class="fu-alert" onclick="go('prospects')" style="display:none">
-      <div class="fu-top"><div class="fu-dot"></div><div class="fu-title">Follow-ups Due</div></div>
-      <div class="fu-names" id="fuNames"></div>
+    <div class="dal">
+      <div class="dal-hdr">
+        <div class="dal-title">Daily Actions</div>
+        <div class="dal-badge" id="dalBadge"></div>
+      </div>
+      <div id="dalList"></div>
     </div>
     <div class="home-grid">
       <div class="hstat"><div class="hstat-n" id="h-fu" style="color:var(--red)">0</div><div class="hstat-l">Follow-ups Due</div></div>
@@ -471,16 +484,52 @@ function renderCur(){
 
 // ── HOME ──
 function renderHome(){
-  const due=(D.prospects||[]).filter(p=>p.next&&p.stage!=='OFFER');
-  document.getElementById('h-fu').textContent=due.length;
+  document.getElementById('h-fu').textContent=(D.prospects||[]).filter(p=>p.followupDate&&p.stage!=='OFFER').length;
   document.getElementById('h-pv').textContent=calcPV();
   document.getElementById('h-p').textContent=(D.prospects||[]).length;
   document.getElementById('h-c').textContent=(D.customers||[]).filter(c=>c.status==='active').length;
-  const al=document.getElementById('fuAlert');
-  if(due.length){
-    al.style.display='block';
-    document.getElementById('fuNames').textContent=due.slice(0,3).map(p=>p.name).join(', ')+(due.length>3?` +${due.length-3} more`:'');
-  }else al.style.display='none';
+  renderDailyActions();
+}
+
+function renderDailyActions(){
+  const today=new Date();today.setHours(0,0,0,0);
+  const items=(D.prospects||[])
+    .filter(p=>p.followupDate&&p.stage!=='OFFER')
+    .map(p=>{
+      const d=new Date(p.followupDate);d.setHours(0,0,0,0);
+      return{...p,_diff:Math.floor((today-d)/86400000)};
+    })
+    .filter(p=>p._diff>=0)
+    .sort((a,b)=>b._diff-a._diff);
+  const badge=document.getElementById('dalBadge');
+  if(!items.length){
+    badge.textContent='All clear';badge.className='dal-badge clear';
+    document.getElementById('dalList').innerHTML='<div class="dal-clear">✓ You\'re all caught up</div>';
+    return;
+  }
+  badge.textContent=items.length+' due';badge.className='dal-badge hot';
+  document.getElementById('dalList').innerHTML=items.map(p=>{
+    const label=p._diff===0?'TODAY':`${p._diff}d overdue`;
+    const cls=p._diff===0?'dal-today':'dal-overdue';
+    return`<div class="dal-item" onclick="goToProspect('${p.id}')">
+      <div style="min-width:0;flex:1">
+        <div class="dal-name">${esc(p.name)}</div>
+        ${p.next?`<div class="dal-next">${esc(p.next)}</div>`:''}
+      </div>
+      <div class="dal-right">
+        <div class="tag stage-${p.stage}">${p.stage}</div>
+        <div class="${cls}">${label}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function goToProspect(id){
+  go('prospects');
+  setTimeout(()=>{
+    const el=document.getElementById('p_'+id);
+    if(el){el.scrollIntoView({behavior:'smooth',block:'center'});if(!el.classList.contains('open'))el.classList.add('open');}
+  },80);
 }
 
 // ── PROSPECTS ──
