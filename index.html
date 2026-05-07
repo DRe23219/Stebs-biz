@@ -98,6 +98,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;pos
 .dal-overdue{font-size:9px;font-weight:800;color:var(--orange);text-transform:uppercase;letter-spacing:.5px}
 .dal-today{font-size:9px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;animation:pulse 1.8s ease-in-out infinite}
 .dal-clear{text-align:center;padding:20px;font-size:13px;color:var(--green);font-weight:600}
+.dal-done-btn{flex-shrink:0;width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(110,240,160,.3);background:var(--green-d);color:var(--green);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s;-webkit-tap-highlight-color:transparent}
+.dal-done-btn:active{transform:scale(.85);background:rgba(110,240,160,.25)}
 
 /* HOME GRID */
 .home-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:14px 18px 0}
@@ -507,10 +509,25 @@ function renderHome(){
   renderDAL();
 }
 
+function getDoneKey(){
+  const d = new Date(); return `stebs_done_${d.getFullYear()}_${d.getMonth()}_${d.getDate()}`;
+}
+function getDoneSet(){
+  try{ return new Set(JSON.parse(localStorage.getItem(getDoneKey())||'[]')); }catch{ return new Set(); }
+}
+function markDone(id, ev){
+  ev.stopPropagation();
+  const done = getDoneSet(); done.add(id);
+  localStorage.setItem(getDoneKey(), JSON.stringify([...done]));
+  renderDAL(); renderHome();
+  toast('✓ Marked done');
+}
+
 function renderDAL(){
   const today = new Date(); today.setHours(0,0,0,0);
+  const done = getDoneSet();
   const items = (D.prospects||[])
-    .filter(p => p.followupDate && p.stage !== 'OFFER')
+    .filter(p => p.followupDate && p.stage !== 'OFFER' && !done.has(p.id))
     .map(p => { const d = new Date(p.followupDate); d.setHours(0,0,0,0); return { ...p, _d: Math.floor((today-d)/86400000) }; })
     .filter(p => p._d >= 0)
     .sort((a,b) => b._d - a._d);
@@ -536,6 +553,7 @@ function renderDAL(){
         <div class="tag stage-${p.stage}">${p.stage}</div>
         <div class="${cls}">${lbl}</div>
       </div>
+      <button class="dal-done-btn" onclick="markDone('${p.id}',event)" title="Mark done">✓</button>
     </div>`;
   }).join('');
 }
