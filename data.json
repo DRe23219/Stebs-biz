@@ -125,10 +125,16 @@
       "followup": "",
       "fnote": "Sleep Health is current priority. Also push Protein Bars, Protein Shakes, XS Energy.",
       "notes": "~22. Special ed teacher. Played volleyball in college — athletic. Known since age 8, long-time family friend from church. Business awareness unknown.",
-      "orders": [],
+      "orders": [
+        {
+          "month": "May 2026",
+          "products": "Sleep Health x1\nXS Elite Focus Energy x1",
+          "pv": 87
+        }
+      ],
       "samples": [],
-      "interests": ["Sleep Health", "XS Sports Protein Bars", "Vanilla Protein Shake", "XS Energy Drinks"],
-      "updatedAt": "2026-05-08T00:45:00Z"
+      "interests": ["XS Sports Protein Bars", "Vanilla Protein Shake", "XS Energy Drinks"],
+      "updatedAt": "2026-05-08T01:00:00Z"
     },
     {
       "id": "c005",
