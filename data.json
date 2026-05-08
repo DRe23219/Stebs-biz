@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-08T00:30:00Z",
+  "lastUpdated": "2026-05-08T00:45:00Z",
   "prospects": [
     {
       "id": "p011",
@@ -113,6 +113,23 @@
     }
   ],
   "customers": [
+    {
+      "id": "c006",
+      "name": "Crystal",
+      "how": "Church / Family friend",
+      "status": "active",
+      "phone": "",
+      "birthday": "",
+      "currentProducts": "Melatonin Gummies (past order)",
+      "frequency": "",
+      "followup": "",
+      "fnote": "Sleep Health is current priority. Also push Protein Bars, Protein Shakes, XS Energy.",
+      "notes": "~22. Special ed teacher. Played volleyball in college — athletic. Known since age 8, long-time family friend from church. Business awareness unknown.",
+      "orders": [],
+      "samples": [],
+      "interests": ["Sleep Health", "XS Sports Protein Bars", "Vanilla Protein Shake", "XS Energy Drinks"],
+      "updatedAt": "2026-05-08T00:45:00Z"
+    },
     {
       "id": "c005",
       "name": "Emanuel",
