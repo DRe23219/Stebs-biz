@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-08T00:00:00Z",
+  "lastUpdated": "2026-05-08T00:30:00Z",
   "prospects": [
     {
       "id": "p011",
@@ -113,6 +113,29 @@
     }
   ],
   "customers": [
+    {
+      "id": "c005",
+      "name": "Emanuel",
+      "how": "Church / Barber client",
+      "status": "active",
+      "phone": "",
+      "birthday": "",
+      "currentProducts": "",
+      "frequency": "New",
+      "followup": "",
+      "fnote": "Sleep Health x1 pending — Stebs covering the purchase. Follow up once it arrives.",
+      "notes": "Early 20s. Pool guy and private soccer coach. Has a girlfriend, plays soccer. Met at church, kept in touch — regular barber client for ~1 year. Business-aware but product side only for now.",
+      "orders": [
+        {
+          "month": "May 2026",
+          "products": "Sleep Health x1 (pending)",
+          "pv": 0
+        }
+      ],
+      "samples": [],
+      "interests": ["Sleep Health"],
+      "updatedAt": "2026-05-08T00:30:00Z"
+    },
     {
       "id": "c001",
       "name": "Madre",
