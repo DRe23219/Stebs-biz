@@ -14,7 +14,7 @@
   --orange:#f5a05a;--orange-dim:rgba(245,160,90,0.13);
   --amber:#f0b86a;
   --green:#6ef0a0;--green-dim:rgba(110,240,160,0.10);
-  --purple:#b48ef7;--purple-dim:rgba(180,142,247,0.10);
+  --blue:#7ab8f7;--blue-dim:rgba(122,184,247,0.10);
   --red:#f77e7e;--red-dim:rgba(247,126,126,0.10);
   --text:#f2ede4;--text2:#a09680;--text3:#5e5648;
   --glow:rgba(232,200,122,0.10);
@@ -30,9 +30,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 .header h1 span{color:var(--gold)}
 .header p{margin-top:12px;color:var(--text2);font-size:15px;font-weight:400;max-width:420px;margin-inline:auto}
 
-/* AI badge in header */
-.ai-pill{display:inline-flex;align-items:center;gap:6px;background:var(--purple-dim);border:1px solid rgba(180,142,247,0.25);border-radius:99px;padding:4px 12px;font-size:11px;font-weight:600;color:var(--purple);letter-spacing:0.06em;margin-top:14px}
-.ai-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--purple);animation:pulse 1.8s ease-in-out infinite}
+/* Smart mode badge in header */
+.ai-pill{display:inline-flex;align-items:center;gap:6px;background:var(--blue-dim);border:1px solid rgba(122,184,247,0.25);border-radius:99px;padding:4px 12px;font-size:11px;font-weight:600;color:var(--blue);letter-spacing:0.06em;margin-top:14px}
+.ai-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 1.8s ease-in-out infinite}
 
 /* Card */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;width:100%;max-width:660px}
@@ -54,12 +54,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 .zone.has-file .zone-file{display:block}
 .zone.has-file .zone-sub{display:none}
 
-/* AI instructions area */
+/* Instructions area */
 .instructions-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
 .instructions-label{font-size:13px;font-weight:600;color:var(--text2)}
-.instructions-badge{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);background:var(--purple-dim);border:1px solid rgba(180,142,247,0.2);border-radius:99px;padding:2px 8px}
+.instructions-badge{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);background:var(--blue-dim);border:1px solid rgba(122,184,247,0.2);border-radius:99px;padding:2px 8px}
 .instructions-textarea{width:100%;background:var(--surface2);border:1.5px solid var(--border2);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.5;resize:vertical;min-height:72px;outline:none;transition:border-color .2s;margin-bottom:8px}
-.instructions-textarea:focus{border-color:var(--purple)}
+.instructions-textarea:focus{border-color:var(--blue)}
 .instructions-textarea::placeholder{color:var(--text3)}
 .instructions-hint{font-size:11px;color:var(--text3);margin-bottom:20px;line-height:1.4}
 .instructions-hint strong{color:var(--text2)}
@@ -87,11 +87,11 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 .result-meta{font-size:13px;color:var(--text2);margin-bottom:20px}
 .result-meta strong{color:var(--text)}
 
-/* AI feature tags in result */
+/* Feature tags in result */
 .ai-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:24px}
 .ai-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:0.05em;padding:4px 10px;border-radius:99px;opacity:0.5}
 .ai-tag.active{opacity:1}
-.ai-tag-clip{background:var(--purple-dim);color:var(--purple);border:1px solid rgba(180,142,247,0.25)}
+.ai-tag-clip{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(122,184,247,0.25)}
 .ai-tag-beat{background:var(--gold-dim);color:var(--gold);border:1px solid rgba(232,200,122,0.25)}
 .ai-tag-cap{background:var(--green-dim);color:var(--green);border:1px solid rgba(110,240,160,0.2)}
 
@@ -124,9 +124,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
     <p class="header-eyebrow">Steb's</p>
     <h1>Clip <span>Lab</span></h1>
     <p>Upload your reference pacing video and raw footage — get a clean jump-cut edit back.</p>
-    <div class="ai-pill" id="ai-pill" style="display:none">
+    <div class="ai-pill">
       <span class="ai-pill-dot"></span>
-      AI Agent Active
+      Smart Editing Active
     </div>
   </header>
 
@@ -162,17 +162,17 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 
     <!-- AI instructions -->
     <div class="instructions-header">
-      <span class="instructions-label">Editing Instructions</span>
-      <span class="instructions-badge">AI</span>
+      <span class="instructions-label">Editing Preferences</span>
+      <span class="instructions-badge">Smart</span>
       <span style="font-size:11px;color:var(--text3)">(optional)</span>
     </div>
     <textarea
       id="instructions-input"
       class="instructions-textarea"
-      placeholder='e.g. "focus on the fade and lineup, skip the waiting parts, add hype captions, make it fast"'
+      placeholder='e.g. "focus on the fade and lineup, skip the waiting parts, fast, no captions"'
     ></textarea>
     <div class="instructions-hint">
-      Claude will <strong>select the best moments</strong>, <strong>sync cuts to the beat</strong>, and <strong>generate captions</strong> based on your instructions.
+      Keywords like <strong>fast / slow</strong>, <strong>focus on fade / action</strong>, <strong>skip waiting</strong>, and <strong>no captions</strong> adjust the edit. Motion scoring, beat detection and captions all run locally — no internet needed.
     </div>
 
     <button class="btn btn-primary" id="process-btn" disabled>
@@ -195,9 +195,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
     <div class="result-meta" id="result-meta"></div>
 
     <div class="ai-tags" id="ai-tags">
-      <span class="ai-tag ai-tag-clip" id="tag-ai-clips">✦ AI Clip Selection</span>
+      <span class="ai-tag ai-tag-clip" id="tag-ai-clips">◎ Smart Selection</span>
       <span class="ai-tag ai-tag-beat" id="tag-beat-sync">♫ Beat Synced</span>
-      <span class="ai-tag ai-tag-cap" id="tag-captions">◈ Auto Captions</span>
+      <span class="ai-tag ai-tag-cap" id="tag-captions">◈ Captions</span>
     </div>
 
     <a class="btn btn-download" id="download-btn" href="#">
@@ -272,11 +272,9 @@ const STAGES = {
 
 // Map backend message keywords to a friendly sub-label
 const STEP_HINTS = [
-  { re: /claude.*instruction/i,  hint: '▸ reading your instructions...' },
-  { re: /extract.*frame/i,       hint: '▸ pulling keyframes...' },
-  { re: /claude.*select/i,       hint: '▸ Claude is watching your footage...' },
+  { re: /scoring/i,              hint: '▸ measuring motion & sharpness...' },
   { re: /beat/i,                 hint: '▸ syncing to the beat...' },
-  { re: /caption/i,              hint: '▸ writing captions...' },
+  { re: /caption/i,              hint: '▸ burning in captions...' },
   { re: /cut \d+/i,              hint: '▸ cutting clips...' },
   { re: /joining/i,              hint: '▸ stitching clips together...' },
   { re: /analysing.*reference/i, hint: '▸ reading reference pacing...' },
@@ -363,8 +361,8 @@ function showResult(sid, data) {
   const meta = document.getElementById('result-meta');
   meta.innerHTML = `<strong>${data.output_duration}s</strong> edited video · <strong>${data.num_clips}</strong> jump cuts · 9:16 vertical · ready to post`;
 
-  // Activate AI feature tags based on what was used
-  document.getElementById('tag-ai-clips').classList.toggle('active', !!data.ai_clip_selection);
+  // Activate feature tags based on what was used
+  document.getElementById('tag-ai-clips').classList.toggle('active', !!data.smart_selection);
   document.getElementById('tag-beat-sync').classList.toggle('active', !!data.beat_synced);
   document.getElementById('tag-captions').classList.toggle('active', !!data.captions_added);
 
@@ -415,12 +413,7 @@ processBtn.addEventListener('click', async () => {
     const uploadData = await uploadFiles();
     sessionId = uploadData.session_id;
 
-    // Show AI pill if server has AI enabled
-    if (uploadData.ai_available) {
-      document.getElementById('ai-pill').style.display = 'inline-flex';
-    }
-
-    setProgress(15, 'Upload complete — starting AI analysis...');
+    setProgress(15, 'Upload complete — starting analysis...');
 
     // Kick off processing with instructions
     const procRes = await fetch(`/process/${sessionId}`, {
