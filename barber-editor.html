@@ -14,13 +14,13 @@
   --orange:#f5a05a;--orange-dim:rgba(245,160,90,0.13);
   --amber:#f0b86a;
   --green:#6ef0a0;--green-dim:rgba(110,240,160,0.10);
+  --purple:#b48ef7;--purple-dim:rgba(180,142,247,0.10);
   --red:#f77e7e;--red-dim:rgba(247,126,126,0.10);
   --text:#f2ede4;--text2:#a09680;--text3:#5e5648;
   --glow:rgba(232,200,122,0.10);
 }
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.5}
 
-/* Layout */
 .app{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:48px 20px 80px}
 
 /* Header */
@@ -28,7 +28,11 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 .header-eyebrow{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:10px}
 .header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:900;letter-spacing:-0.01em;color:var(--text);line-height:1.05}
 .header h1 span{color:var(--gold)}
-.header p{margin-top:12px;color:var(--text2);font-size:15px;font-weight:400;max-width:400px;margin-inline:auto}
+.header p{margin-top:12px;color:var(--text2);font-size:15px;font-weight:400;max-width:420px;margin-inline:auto}
+
+/* AI badge in header */
+.ai-pill{display:inline-flex;align-items:center;gap:6px;background:var(--purple-dim);border:1px solid rgba(180,142,247,0.25);border-radius:99px;padding:4px 12px;font-size:11px;font-weight:600;color:var(--purple);letter-spacing:0.06em;margin-top:14px}
+.ai-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--purple);animation:pulse 1.8s ease-in-out infinite}
 
 /* Card */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;width:100%;max-width:660px}
@@ -50,6 +54,19 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 .zone.has-file .zone-file{display:block}
 .zone.has-file .zone-sub{display:none}
 
+/* AI instructions area */
+.instructions-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.instructions-label{font-size:13px;font-weight:600;color:var(--text2)}
+.instructions-badge{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);background:var(--purple-dim);border:1px solid rgba(180,142,247,0.2);border-radius:99px;padding:2px 8px}
+.instructions-textarea{width:100%;background:var(--surface2);border:1.5px solid var(--border2);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.5;resize:vertical;min-height:72px;outline:none;transition:border-color .2s;margin-bottom:8px}
+.instructions-textarea:focus{border-color:var(--purple)}
+.instructions-textarea::placeholder{color:var(--text3)}
+.instructions-hint{font-size:11px;color:var(--text3);margin-bottom:20px;line-height:1.4}
+.instructions-hint strong{color:var(--text2)}
+
+/* Divider */
+.divider{height:1px;background:var(--border);margin:20px 0}
+
 /* Button */
 .btn{display:block;width:100%;padding:16px 24px;border-radius:12px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;transition:opacity .2s,transform .1s;outline:none}
 .btn:active{transform:scale(0.985)}
@@ -60,15 +77,23 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 /* Progress */
 .progress-wrap{width:100%;max-width:660px;margin-top:16px}
 .progress-bar{height:4px;background:var(--surface3);border-radius:99px;overflow:hidden;margin-bottom:12px}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:99px;transition:width .4s ease;width:0%}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--gold),var(--orange));border-radius:99px;transition:width .4s ease;width:0%}
 .status-msg{font-size:13px;color:var(--text2);text-align:center}
 .status-step{font-size:12px;color:var(--text3);text-align:center;margin-top:4px;font-style:italic}
 
 /* Result */
 .result-card{background:var(--surface);border:1px solid rgba(110,240,160,0.2);border-radius:18px;padding:32px;width:100%;max-width:660px;margin-top:16px;text-align:center}
 .result-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--green);margin-bottom:8px}
-.result-meta{font-size:13px;color:var(--text2);margin-bottom:24px}
+.result-meta{font-size:13px;color:var(--text2);margin-bottom:20px}
 .result-meta strong{color:var(--text)}
+
+/* AI feature tags in result */
+.ai-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:24px}
+.ai-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:0.05em;padding:4px 10px;border-radius:99px;opacity:0.5}
+.ai-tag.active{opacity:1}
+.ai-tag-clip{background:var(--purple-dim);color:var(--purple);border:1px solid rgba(180,142,247,0.25)}
+.ai-tag-beat{background:var(--gold-dim);color:var(--gold);border:1px solid rgba(232,200,122,0.25)}
+.ai-tag-cap{background:var(--green-dim);color:var(--green);border:1px solid rgba(110,240,160,0.2)}
 
 /* Error */
 .error-card{background:var(--surface);border:1px solid rgba(247,126,126,0.2);border-radius:18px;padding:24px;width:100%;max-width:660px;margin-top:16px;text-align:center}
@@ -79,15 +104,15 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 .reset-link{margin-top:16px;font-size:13px;color:var(--text3);cursor:pointer;text-align:center;text-decoration:underline;display:block}
 .reset-link:hover{color:var(--text2)}
 
-/* Spinner animation on btn */
+/* Spinner */
 @keyframes spin{to{transform:rotate(360deg)}}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,0.2);border-top-color:#0d0b08;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px}
 
-/* Pulse for analyzing state */
+/* Pulse */
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .pulse{animation:pulse 1.4s ease-in-out infinite}
 
-/* Upload progress bar */
+/* Upload progress */
 .upload-progress{margin-top:8px;height:3px;background:var(--surface3);border-radius:99px;overflow:hidden;display:none}
 .upload-progress-fill{height:100%;background:var(--amber);border-radius:99px;width:0%;transition:width .1s}
 </style>
@@ -99,6 +124,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
     <p class="header-eyebrow">Steb's</p>
     <h1>Clip <span>Lab</span></h1>
     <p>Upload your reference pacing video and raw footage — get a clean jump-cut edit back.</p>
+    <div class="ai-pill" id="ai-pill" style="display:none">
+      <span class="ai-pill-dot"></span>
+      AI Agent Active
+    </div>
   </header>
 
   <!-- Upload card -->
@@ -129,6 +158,23 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
       <div class="upload-progress-fill" id="upload-progress-fill"></div>
     </div>
 
+    <div class="divider"></div>
+
+    <!-- AI instructions -->
+    <div class="instructions-header">
+      <span class="instructions-label">Editing Instructions</span>
+      <span class="instructions-badge">AI</span>
+      <span style="font-size:11px;color:var(--text3)">(optional)</span>
+    </div>
+    <textarea
+      id="instructions-input"
+      class="instructions-textarea"
+      placeholder='e.g. "focus on the fade and lineup, skip the waiting parts, add hype captions, make it fast"'
+    ></textarea>
+    <div class="instructions-hint">
+      Claude will <strong>select the best moments</strong>, <strong>sync cuts to the beat</strong>, and <strong>generate captions</strong> based on your instructions.
+    </div>
+
     <button class="btn btn-primary" id="process-btn" disabled>
       Upload &amp; Edit
     </button>
@@ -147,6 +193,13 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
   <div class="result-card" id="result-card" style="display:none">
     <div class="result-title">Edit Ready</div>
     <div class="result-meta" id="result-meta"></div>
+
+    <div class="ai-tags" id="ai-tags">
+      <span class="ai-tag ai-tag-clip" id="tag-ai-clips">✦ AI Clip Selection</span>
+      <span class="ai-tag ai-tag-beat" id="tag-beat-sync">♫ Beat Synced</span>
+      <span class="ai-tag ai-tag-cap" id="tag-captions">◈ Auto Captions</span>
+    </div>
+
     <a class="btn btn-download" id="download-btn" href="#">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M4 7l4 4 4-4M2 13h12" stroke="#0d0b08" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Download Edited Video
@@ -164,18 +217,20 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 </div>
 
 <script>
-const refInput = document.getElementById('ref-input');
-const rawInput = document.getElementById('raw-input');
-const refZone  = document.getElementById('ref-zone');
-const rawZone  = document.getElementById('raw-zone');
-const refName  = document.getElementById('ref-name');
-const rawName  = document.getElementById('raw-name');
+const refInput  = document.getElementById('ref-input');
+const rawInput  = document.getElementById('raw-input');
+const refZone   = document.getElementById('ref-zone');
+const rawZone   = document.getElementById('raw-zone');
+const refName   = document.getElementById('ref-name');
+const rawName   = document.getElementById('raw-name');
 const processBtn = document.getElementById('process-btn');
+const instructionsInput = document.getElementById('instructions-input');
 
 let refFile = null;
 let rawFile = null;
 let sessionId = null;
 let pollTimer = null;
+let aiAvailable = false;
 
 function setFile(which, file) {
   if (!file) return;
@@ -206,22 +261,41 @@ rawInput.addEventListener('change', e => setFile('raw', e.target.files[0]));
 refZone.addEventListener('drop', e => { setFile('ref', e.dataTransfer.files[0]); });
 rawZone.addEventListener('drop', e => { setFile('raw', e.dataTransfer.files[0]); });
 
-// ---- Progress state ----
+// ---- Progress ----
 const STAGES = {
-  queued:     { pct: 5,  label: 'Uploading complete, queued...' },
-  analyzing:  { pct: 25, label: 'Analyzing reference pacing...' },
-  processing: { pct: 60, label: 'Cutting and joining clips...' },
-  done:       { pct: 100, label: 'Done!' },
-  error:      { pct: 0,  label: 'Error' }
+  queued:     { pct: 5 },
+  analyzing:  { pct: 20 },
+  processing: { pct: 55 },
+  done:       { pct: 100 },
+  error:      { pct: 0  }
 };
 
-function setProgress(pct, msg, sub) {
-  document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('status-msg').textContent = msg;
-  document.getElementById('status-step').textContent = sub || '';
+// Map backend message keywords to a friendly sub-label
+const STEP_HINTS = [
+  { re: /claude.*instruction/i,  hint: '▸ reading your instructions...' },
+  { re: /extract.*frame/i,       hint: '▸ pulling keyframes...' },
+  { re: /claude.*select/i,       hint: '▸ Claude is watching your footage...' },
+  { re: /beat/i,                 hint: '▸ syncing to the beat...' },
+  { re: /caption/i,              hint: '▸ writing captions...' },
+  { re: /cut \d+/i,              hint: '▸ cutting clips...' },
+  { re: /joining/i,              hint: '▸ stitching clips together...' },
+  { re: /analysing.*reference/i, hint: '▸ reading reference pacing...' },
+];
+
+function getHint(msg) {
+  for (const { re, hint } of STEP_HINTS) {
+    if (re.test(msg)) return hint;
+  }
+  return '';
 }
 
-// ---- Upload with XHR for progress ----
+function setProgress(pct, msg) {
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('status-msg').textContent = msg;
+  document.getElementById('status-step').textContent = getHint(msg);
+}
+
+// ---- Upload ----
 function uploadFiles() {
   return new Promise((resolve, reject) => {
     const form = new FormData();
@@ -252,25 +326,23 @@ function uploadFiles() {
   });
 }
 
-// ---- Poll status ----
+// ---- Poll ----
 function startPolling(sid) {
   pollTimer = setInterval(async () => {
     try {
       const res = await fetch(`/status/${sid}`);
       const data = await res.json();
-      const stage = STAGES[data.status] || { pct: 10, label: 'Working...' };
+      const stage = STAGES[data.status] || { pct: 10 };
 
-      // For processing stage, bump pct based on message parsing
       let pct = stage.pct;
       if (data.status === 'processing') {
         const m = data.message.match(/Cut (\d+)\/(\d+)/);
         if (m) {
-          const done = parseInt(m[1]), total = parseInt(m[2]);
-          pct = 25 + Math.round((done / total) * 60);
+          pct = 55 + Math.round((parseInt(m[1]) / parseInt(m[2])) * 30);
         }
       }
 
-      setProgress(pct, data.message, data.status === 'analyzing' ? '▸ reading frames...' : '');
+      setProgress(pct, data.message);
 
       if (data.status === 'done') {
         clearInterval(pollTimer);
@@ -287,8 +359,15 @@ function startPolling(sid) {
 
 function showResult(sid, data) {
   document.getElementById('progress-wrap').style.display = 'none';
+
   const meta = document.getElementById('result-meta');
   meta.innerHTML = `<strong>${data.output_duration}s</strong> edited video · <strong>${data.num_clips}</strong> jump cuts · 9:16 vertical · ready to post`;
+
+  // Activate AI feature tags based on what was used
+  document.getElementById('tag-ai-clips').classList.toggle('active', !!data.ai_clip_selection);
+  document.getElementById('tag-beat-sync').classList.toggle('active', !!data.beat_synced);
+  document.getElementById('tag-captions').classList.toggle('active', !!data.captions_added);
+
   document.getElementById('download-btn').href = `/download/${sid}`;
   document.getElementById('result-card').style.display = 'block';
 }
@@ -324,27 +403,37 @@ document.getElementById('error-reset-link').addEventListener('click', resetApp);
 processBtn.addEventListener('click', async () => {
   if (!refFile || !rawFile) return;
 
+  const instructions = instructionsInput.value.trim();
+
   processBtn.disabled = true;
   processBtn.innerHTML = '<span class="spinner"></span>Uploading...';
   document.getElementById('upload-card').style.display = 'none';
   document.getElementById('progress-wrap').style.display = 'block';
-  setProgress(5, 'Uploading videos...', '');
+  setProgress(5, 'Uploading videos...');
 
   try {
-    // Upload
     const uploadData = await uploadFiles();
     sessionId = uploadData.session_id;
 
-    setProgress(15, 'Upload complete — starting analysis...', '');
+    // Show AI pill if server has AI enabled
+    if (uploadData.ai_available) {
+      document.getElementById('ai-pill').style.display = 'inline-flex';
+    }
 
-    // Kick off processing
-    const procRes = await fetch(`/process/${sessionId}`, { method: 'POST' });
+    setProgress(15, 'Upload complete — starting AI analysis...');
+
+    // Kick off processing with instructions
+    const procRes = await fetch(`/process/${sessionId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ instructions })
+    });
+
     if (!procRes.ok) {
       const err = await procRes.json();
       throw new Error(err.error || 'Failed to start processing');
     }
 
-    // Poll
     startPolling(sessionId);
   } catch (e) {
     document.getElementById('upload-card').style.display = 'block';
