@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-11T00:00:00Z",
+  "lastUpdated": "2026-05-14T00:00:00Z",
   "prospects": [
     {
       "id": "p011",
@@ -110,6 +110,16 @@
       "next": "Never responded — leaving it",
       "followupDate": null,
       "updatedAt": "2026-05-11T00:00:00Z"
+    },
+    {
+      "id": "p012",
+      "name": "Ulises",
+      "where": "EOS Gym",
+      "stage": "COLD",
+      "notes": "Met at EOS gym. DTM'd — said yes to looking. Reaching out to schedule MG.",
+      "next": "Reach out to schedule MG",
+      "followupDate": null,
+      "updatedAt": "2026-05-14T00:00:00Z"
     }
   ],
   "customers": [
