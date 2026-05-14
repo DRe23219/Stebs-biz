@@ -248,6 +248,36 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;pos
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 .empty{text-align:center;color:var(--text3);font-size:13px;padding:40px 0;font-weight:500}
+
+/* ADD BUTTON */
+.add-btn{width:32px;height:32px;border-radius:50%;background:var(--orange-d);border:1px solid rgba(245,160,90,.35);color:var(--orange);font-size:22px;font-weight:300;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .18s;line-height:1;padding-bottom:1px;-webkit-tap-highlight-color:transparent}
+.add-btn:active{transform:scale(.88)}
+
+/* ADD MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.modal-overlay.on{opacity:1;pointer-events:all}
+.add-sheet{position:absolute;bottom:0;left:0;right:0;background:var(--s2);border:1px solid var(--border2);border-radius:26px 26px 0 0;padding-bottom:calc(20px + var(--sb));transform:translateY(100%);transition:transform .32s cubic-bezier(.32,1,.22,1);max-height:90vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.modal-overlay.on .add-sheet{transform:translateY(0)}
+.add-hdr{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 14px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--s2);z-index:1}
+.add-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700}
+.add-close{width:28px;height:28px;border-radius:50%;background:var(--s3);border:1px solid var(--border);color:var(--text3);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+.add-close:active{opacity:.6;transform:scale(.88)}
+.add-type-row{display:flex;gap:7px;padding:14px 18px 0}
+.add-type-btn{flex:1;padding:10px;border-radius:13px;border:1px solid var(--border);background:var(--s1);color:var(--text3);font-size:12px;font-weight:700;cursor:pointer;transition:all .18s;text-align:center;user-select:none;-webkit-tap-highlight-color:transparent}
+.add-type-btn.on{background:var(--orange-d);border-color:rgba(245,160,90,.35);color:var(--orange)}
+.add-type-btn:active{transform:scale(.95)}
+.add-fields{padding:4px 18px 0}
+.add-lbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;font-weight:800;margin:14px 0 5px;display:block}
+.add-inp{width:100%;background:var(--s1);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:11px 13px;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.add-inp:focus{border-color:rgba(245,160,90,.4);box-shadow:0 0 0 3px rgba(245,160,90,.06)}
+.add-inp.add-area{min-height:88px;resize:none;line-height:1.6}
+.add-inp.add-sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6' fill='none' stroke='%235e5648' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:32px;appearance:none;-webkit-appearance:none}
+.add-inp[type=date]{color-scheme:dark}
+.add-save-btn{display:block;margin:16px 18px 0;width:calc(100% - 36px);padding:15px;border-radius:16px;background:linear-gradient(135deg,var(--orange),var(--gold));border:none;color:#0d0b08;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.2px;-webkit-tap-highlight-color:transparent}
+.add-save-btn:active{transform:scale(.97);opacity:.88}
+.local-tag{font-size:8px;font-weight:800;padding:3px 7px;border-radius:7px;background:rgba(245,160,90,.12);border:1px solid rgba(245,160,90,.25);color:var(--orange);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.del-local-btn{margin-top:12px;width:100%;padding:10px;background:var(--red-d);border:1px solid rgba(247,126,126,.22);color:var(--red);border-radius:11px;font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;-webkit-tap-highlight-color:transparent}
+.del-local-btn:active{opacity:.7}
 </style>
 </head>
 <body>
@@ -324,6 +354,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;pos
   <div class="pad">
     <div class="topbar">
       <div class="page-title" style="color:var(--gold)">Prospects</div>
+      <button class="add-btn" onclick="openAdd('prospect')" title="Add prospect">+</button>
       <button class="sync-btn" onclick="sync(true)"><span class="sync-icon">↻</span> Sync</button>
     </div>
     <div class="stats-row" id="pStats"></div>
@@ -337,6 +368,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;pos
   <div class="pad">
     <div class="topbar">
       <div class="page-title" style="color:var(--blue)">Customers</div>
+      <button class="add-btn" onclick="openAdd('customer')" title="Add customer" style="border-color:rgba(126,184,247,.35);color:var(--blue);background:var(--blue-d)">+</button>
       <div class="pv-pill" id="pvBadge">0 PV</div>
     </div>
     <div class="tabs" id="cTabs">
@@ -411,6 +443,57 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;pos
   </div>
 </div>
 
+<!-- ADD MODAL -->
+<div id="addOverlay" class="modal-overlay" onclick="closeAdd()">
+  <div class="add-sheet" onclick="event.stopPropagation()">
+    <div class="add-hdr">
+      <div class="add-title" id="addSheetTitle">Add Prospect</div>
+      <button class="add-close" onclick="closeAdd()">✕</button>
+    </div>
+    <div class="add-type-row">
+      <div class="add-type-btn on" id="atb-prospect" onclick="switchAddType('prospect')">🎯 Prospect</div>
+      <div class="add-type-btn" id="atb-customer" onclick="switchAddType('customer')">🛍️ Customer</div>
+    </div>
+    <div class="add-fields">
+      <label class="add-lbl">Name *</label>
+      <input class="add-inp" id="addName" type="text" placeholder="Full name" autocomplete="off">
+
+      <div id="addProspectFields">
+        <label class="add-lbl">Met at</label>
+        <input class="add-inp" id="addWhere" type="text" placeholder="EOS Gym, Barber, Church..." autocomplete="off">
+        <label class="add-lbl">Stage</label>
+        <select class="add-inp add-sel" id="addStage">
+          <option value="COLD">COLD</option>
+          <option value="MG">MG</option>
+          <option value="FU">FU</option>
+          <option value="BP">BP</option>
+          <option value="OFFER">OFFER</option>
+          <option value="RED">RED</option>
+        </select>
+        <label class="add-lbl">Next Step</label>
+        <input class="add-inp" id="addNext" type="text" placeholder="e.g. Call tomorrow to set up MG" autocomplete="off">
+        <label class="add-lbl">Follow-up Date</label>
+        <input class="add-inp" id="addDate" type="date">
+      </div>
+
+      <div id="addCustomerFields" style="display:none">
+        <label class="add-lbl">How you know them</label>
+        <input class="add-inp" id="addHow" type="text" placeholder="Barber client, Church, Gym..." autocomplete="off">
+        <label class="add-lbl">Status</label>
+        <select class="add-inp add-sel" id="addStatus">
+          <option value="potential">Potential</option>
+          <option value="sampled">Sampled</option>
+          <option value="active">Active</option>
+        </select>
+      </div>
+
+      <label class="add-lbl">Notes</label>
+      <textarea class="add-inp add-area" id="addNotes" placeholder="Background, hook, what they said..."></textarea>
+    </div>
+    <button class="add-save-btn" onclick="saveAdd()">Save</button>
+  </div>
+</div>
+
 <!-- BOTTOM NAV -->
 <div id="bnav">
   <div class="bi on" data-s="home" onclick="go('home')"><div class="bi-icon">🏠</div><div class="bi-label">Home</div></div>
@@ -423,10 +506,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;pos
 <script>
 'use strict';
 const CACHE_KEY = 'stebs_v2';
+const LOCAL_KEY  = 'stebs_local_v2';
 let D = { prospects:[], customers:[], team:[], notes:[], products:[] };
-let ctab = 'active', cur = 'home', activeCat = 'All';
+let localData = { prospects:[], customers:[] };
+let ctab = 'active', cur = 'home', activeCat = 'All', addType = 'prospect';
 
-// ── UTILS ──────────────────────────────────────────────────
+// ── UTILS ──────────────────────────────────────────────────────────
 function esc(s){ return s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : ''; }
 function toast(msg, ms=2400){
   const el = document.getElementById('toast');
@@ -441,12 +526,11 @@ function calcPV(){
     t + (c.orders||[]).filter(o=>o.month===mo).reduce((s,o) => s + (Number(o.pv)||0), 0), 0);
 }
 
-// ── NAVIGATION ─────────────────────────────────────────────
+// ── NAVIGATION ─────────────────────────────────────────────────────
 function go(s){
   document.querySelectorAll('.screen').forEach(x => x.classList.remove('on'));
   document.querySelectorAll('.bi').forEach(x => x.classList.remove('on'));
   document.getElementById(s).classList.add('on');
-  // Team has no nav item — don't crash if missing
   const navEl = document.querySelector(`.bi[data-s="${s}"]`);
   if(navEl) navEl.classList.add('on');
   document.getElementById(s).scrollTop = 0;
@@ -463,13 +547,14 @@ function go(s){
   if(s === 'customers') setCtab(ctab, true);
 }
 
-// ── SYNC ───────────────────────────────────────────────────
+// ── SYNC ──────────────────────────────────────────────────────────
 async function sync(manual=false){
   document.querySelectorAll('.sync-btn').forEach(b => b.classList.add('syncing'));
   try{
     const r = await fetch('./data.json?t=' + Date.now());
     if(!r.ok) throw new Error();
     D = await r.json();
+    mergeLocal(); injectLocal();
     localStorage.setItem(CACHE_KEY, JSON.stringify({ data:D, ts:Date.now() }));
     updateSyncTime(Date.now());
     renderCur();
@@ -494,7 +579,7 @@ function renderCur(){
   if(fn[cur]) fn[cur]();
 }
 
-// ── HOME ───────────────────────────────────────────────────
+// ── HOME ──────────────────────────────────────────────────────────
 function renderHome(){
   const ps = D.prospects || [];
   const today = new Date(); today.setHours(0,0,0,0);
@@ -567,7 +652,7 @@ function goToProspect(id){
   }, 80);
 }
 
-// ── PROSPECTS ──────────────────────────────────────────────
+// ── PROSPECTS ──────────────────────────────────────────────────────
 const STAGE_ORDER = { OFFER:0, BP:1, FU:2, MG:3, COLD:4 };
 
 function renderProspects(){
@@ -583,6 +668,10 @@ function renderProspects(){
   const sorted = [...ps].sort((a,b) => (STAGE_ORDER[a.stage]??9) - (STAGE_ORDER[b.stage]??9));
   document.getElementById('pList').innerHTML = sorted.map(p => {
     const ini = initials(p.name);
+    const localTag = p._local ? `<div class="local-tag">unsaved</div>` : '';
+    const deleteBtn = p._local
+      ? `<button class="del-local-btn" onclick="deleteLocal('${p.id}','prospect',event)">Remove local entry</button>`
+      : '';
     return `<div class="card" id="p_${p.id}">
       <div class="card-top" onclick="tog('p_${p.id}')">
         <div class="av" style="color:var(--gold)">${ini}</div>
@@ -590,18 +679,19 @@ function renderProspects(){
           <div class="c-name">${esc(p.name)}</div>
           <div class="c-sub">${esc(p.where||'—')}</div>
         </div>
-        <div class="c-right"><div class="tag stage-${p.stage}">${p.stage}</div><div class="ch">▾</div></div>
+        <div class="c-right">${localTag}<div class="tag stage-${p.stage}">${p.stage}</div><div class="ch">▾</div></div>
       </div>
       <div class="card-body">
         ${p.next ? `<div class="next-box"><div class="fl">Next Step</div><div class="fv">${esc(p.next)}</div></div>` : ''}
         ${p.notes ? `<div class="fl">Notes</div><div class="fv">${esc(p.notes)}</div>` : ''}
         ${p.followupDate ? `<div class="fl">Follow-up Date</div><div class="fv" style="color:var(--amber)">${p.followupDate}</div>` : ''}
+        ${deleteBtn}
       </div>
     </div>`;
   }).join('');
 }
 
-// ── CUSTOMERS ──────────────────────────────────────────────
+// ── CUSTOMERS ──────────────────────────────────────────────────────
 const CTAB_META = {
   active:   { label:'Active Customers',      color:'var(--gold)' },
   potential:{ label:'Potential Customers',   color:'var(--blue)' },
@@ -634,6 +724,10 @@ function renderCustomers(){
 
   document.getElementById('cList').innerHTML = fil.map(c => {
     const ini = initials(c.name);
+    const localTag = c._local ? `<div class="local-tag">unsaved</div>` : '';
+    const deleteBtn = c._local
+      ? `<button class="del-local-btn" onclick="deleteLocal('${c.id}','customer',event)">Remove local entry</button>`
+      : '';
     const infoBoxes = [
       c.phone     && `<div class="ib"><div class="ib-l">Phone</div><div class="ib-v">${esc(c.phone)}</div></div>`,
       c.birthday  && `<div class="ib"><div class="ib-l">Birthday</div><div class="ib-v">${esc(c.birthday)}</div></div>`,
@@ -662,7 +756,7 @@ function renderCustomers(){
           <div class="c-name">${esc(c.name)}</div>
           <div class="c-sub">${esc(c.how||'—')}</div>
         </div>
-        <div class="c-right"><div class="tag s-${c.status}">${c.status}</div><div class="ch">▾</div></div>
+        <div class="c-right">${localTag}<div class="tag s-${c.status}">${c.status}</div><div class="ch">▾</div></div>
       </div>
       <div class="card-body">
         ${infoBoxes.length ? `<div class="info-grid">${infoBoxes.join('')}</div>` : ''}
@@ -672,12 +766,13 @@ function renderCustomers(){
         <div class="fl">Samples Given</div>${sampH}
         <div class="fl">Orders</div>${ordersH}
         ${c.notes ? `<div class="fl">Notes</div><div class="fv">${esc(c.notes)}</div>` : ''}
+        ${deleteBtn}
       </div>
     </div>`;
   }).join('');
 }
 
-// ── TEAM ───────────────────────────────────────────────────
+// ── TEAM ──────────────────────────────────────────────────────────
 function renderTeam(){
   const tm = D.team || [];
   document.getElementById('tStats').innerHTML =
@@ -710,7 +805,7 @@ function renderTeam(){
   }).join('');
 }
 
-// ── PRODUCTS ───────────────────────────────────────────────
+// ── PRODUCTS ─────────────────────────────────────────────────────────
 const CAT_COLOR = { Energy:'var(--orange)', Nutrition:'var(--green)', Weight:'var(--blue)',
   Beauty:'var(--purple)', 'Personal Care':'var(--teal)', Home:'var(--gold)', 'High-Ticket':'var(--red)' };
 const CAT_ICO   = { Energy:'⚡', Nutrition:'💊', Weight:'⚖️',
@@ -722,7 +817,7 @@ function renderProducts(){
   if(search) search.value = '';
   const cats = ['All', ...[...new Set((D.products||[]).map(p=>p.category))].sort()];
   document.getElementById('catRow').innerHTML = cats.map(c =>
-    `<div class="cat-chip${c==='All'?' on':''}" onclick="setCat('${esc(c)}')">${c==='All'?'All':(CAT_ICO[c]||'📦')+' '+c}</div>`
+    `<div class="cat-chip${c==='All'?' on':''}" onclick="setCat('${esc(c)}')}">${c==='All'?'All':(CAT_ICO[c]||'📦')+' '+c}</div>`
   ).join('');
   filterProducts();
 }
@@ -783,7 +878,7 @@ function filterProducts(){
   }).join('');
 }
 
-// ── NOTES ──────────────────────────────────────────────────
+// ── NOTES ──────────────────────────────────────────────────────────
 const NOTE_ICONS = { overview:'🗺️', strategy:'🎯', scripts:'📜', dtm:'🗣️', products:'📦',
   knowledge:'📚', 'monthly-goals':'📅', 'may-2026':'📆', training:'🎓', mindset:'💡', hawkins:'🎤' };
 
@@ -815,7 +910,7 @@ function renderNotes(){
   }).join('');
 }
 
-// ── SHARED HELPERS ─────────────────────────────────────────
+// ── SHARED HELPERS ─────────────────────────────────────────────────────
 function stat(n, label, cssVar){
   return `<div class="stat"><div class="stat-n" style="color:var(${cssVar})">${n}</div><div class="stat-l">${label}</div></div>`;
 }
@@ -823,13 +918,117 @@ function initials(name){
   return (name||'').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
 }
 
-// ── INIT ───────────────────────────────────────────────────
+// ── LOCAL ADD ─────────────────────────────────────────────────────
+function loadLocal(){
+  try{ localData = JSON.parse(localStorage.getItem(LOCAL_KEY)||'{"prospects":[],"customers":[]}'); }
+  catch{ localData = {prospects:[],customers:[]}; }
+  if(!localData.prospects) localData.prospects = [];
+  if(!localData.customers) localData.customers = [];
+}
+
+function saveLocal(){ localStorage.setItem(LOCAL_KEY, JSON.stringify(localData)); }
+
+function mergeLocal(){
+  const pNames = new Set((D.prospects||[]).map(p=>p.name.toLowerCase()));
+  const cNames = new Set((D.customers||[]).map(c=>c.name.toLowerCase()));
+  localData.prospects = localData.prospects.filter(p=>!pNames.has(p.name.toLowerCase()));
+  localData.customers = localData.customers.filter(c=>!cNames.has(c.name.toLowerCase()));
+  saveLocal();
+}
+
+function injectLocal(){
+  (localData.prospects||[]).forEach(p=>{
+    if(!(D.prospects||[]).find(x=>x.id===p.id)) (D.prospects=D.prospects||[]).push(p);
+  });
+  (localData.customers||[]).forEach(c=>{
+    if(!(D.customers||[]).find(x=>x.id===c.id)) (D.customers=D.customers||[]).push(c);
+  });
+}
+
+function openAdd(type){
+  addType = type;
+  switchAddType(type);
+  ['addName','addWhere','addNext','addHow','addNotes'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  const ds = document.getElementById('addStage'); if(ds) ds.value='COLD';
+  const dt = document.getElementById('addDate');  if(dt) dt.value='';
+  const st = document.getElementById('addStatus'); if(st) st.value='potential';
+  document.getElementById('addOverlay').classList.add('on');
+  setTimeout(()=>document.getElementById('addName').focus(), 350);
+}
+
+function closeAdd(){ document.getElementById('addOverlay').classList.remove('on'); }
+
+function switchAddType(type){
+  addType = type;
+  document.getElementById('addSheetTitle').textContent = type==='prospect' ? 'Add Prospect' : 'Add Customer';
+  document.getElementById('atb-prospect').classList.toggle('on', type==='prospect');
+  document.getElementById('atb-customer').classList.toggle('on', type==='customer');
+  document.getElementById('addProspectFields').style.display = type==='prospect' ? '' : 'none';
+  document.getElementById('addCustomerFields').style.display = type==='customer' ? '' : 'none';
+}
+
+function saveAdd(){
+  const name = document.getElementById('addName').value.trim();
+  if(!name){ toast('⚠ Name is required'); return; }
+  const now = new Date().toISOString();
+  const lid = 'local_' + Date.now();
+
+  if(addType === 'prospect'){
+    const entry = {
+      id: lid, name, _local: true,
+      where:        document.getElementById('addWhere').value.trim() || '',
+      stage:        document.getElementById('addStage').value,
+      next:         document.getElementById('addNext').value.trim()  || '',
+      followupDate: document.getElementById('addDate').value         || null,
+      notes:        document.getElementById('addNotes').value.trim() || '',
+      updatedAt: now
+    };
+    localData.prospects.push(entry);
+    D.prospects = D.prospects || [];
+    D.prospects.push(entry);
+  } else {
+    const entry = {
+      id: lid, name, _local: true,
+      how:    document.getElementById('addHow').value.trim()    || '',
+      status: document.getElementById('addStatus').value,
+      notes:  document.getElementById('addNotes').value.trim() || '',
+      orders:[], samples:[], interests:[],
+      updatedAt: now
+    };
+    localData.customers.push(entry);
+    D.customers = D.customers || [];
+    D.customers.push(entry);
+  }
+
+  saveLocal();
+  closeAdd();
+  toast('✓ Saved locally — tell Claude to add permanently');
+  if(addType === 'prospect') go('prospects');
+  else go('customers');
+}
+
+function deleteLocal(id, type, ev){
+  ev.stopPropagation();
+  if(type === 'prospect'){
+    localData.prospects = localData.prospects.filter(p=>p.id!==id);
+    D.prospects = D.prospects.filter(p=>p.id!==id);
+  } else {
+    localData.customers = localData.customers.filter(c=>c.id!==id);
+    D.customers = D.customers.filter(c=>c.id!==id);
+  }
+  saveLocal();
+  if(type === 'prospect') renderProspects(); else renderCustomers();
+  toast('Removed');
+}
+
+// ── INIT ───────────────────────────────────────────────────────────
 (async () => {
   try {
     const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
     if(cached?.data){ D = cached.data; updateSyncTime(cached.ts); }
   } catch {}
 
+  loadLocal(); injectLocal();
   await sync(false);
   document.getElementById('loading').style.display = 'none';
   go('home');
